@@ -12,12 +12,12 @@ class MainViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
+    val loading = MutableLiveData<Boolean>()
+
     val launch: LiveData<LaunchModel> = liveData {
         loading.postValue(true)
         emit(repository.getLaunch())
         loading.postValue(false)
     }
-
-    val loading = MutableLiveData<Boolean>()
 
 }

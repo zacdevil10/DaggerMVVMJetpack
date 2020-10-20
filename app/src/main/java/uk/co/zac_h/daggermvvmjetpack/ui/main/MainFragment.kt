@@ -25,7 +25,7 @@ class MainFragment : Fragment() {
 
     @Inject lateinit var viewModel: MainViewModel
 
-    val name = MutableLiveData<String>()
+    lateinit var launch: LaunchModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,10 +41,12 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.lifecycleOwner = this
+
         val launchObserver = Observer<LaunchModel> {
             println(it)
-            binding.message.text = it.missionName
-            //binding.launch?.name?.postValue(it.missionName)
+            //binding.message.text = it.missionName
+            launch = it
         }
 
         viewModel.launch.observe(this, launchObserver)
