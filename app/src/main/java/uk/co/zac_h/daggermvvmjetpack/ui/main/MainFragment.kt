@@ -25,8 +25,6 @@ class MainFragment : Fragment() {
 
     @Inject lateinit var viewModel: MainViewModel
 
-    lateinit var launch: LaunchModel
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,15 +39,10 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.lifecycleOwner = this
-
-        val launchObserver = Observer<LaunchModel> {
-            println(it)
-            //binding.message.text = it.missionName
-            launch = it
+        binding.apply {
+            viewModel = viewModel
+            lifecycleOwner = this@MainFragment
         }
-
-        viewModel.launch.observe(this, launchObserver)
     }
 
 }

@@ -6,9 +6,6 @@
 
     <data>
         <variable
-            name="main"
-            type="uk.co.zac_h.daggermvvmjetpack.ui.main.MainFragment" />
-        <variable
             name="viewModel"
             type="uk.co.zac_h.daggermvvmjetpack.ui.main.MainViewModel" />
         <import type="android.view.View"/>
@@ -31,7 +28,7 @@
             android:id="@+id/message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{main.launch.missionName}"
+            android:text="@{viewModel.launch.missionName}"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
