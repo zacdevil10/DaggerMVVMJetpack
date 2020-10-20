@@ -1,4 +1,4 @@
-package uk.co.zac_h.daggermvvmjetpack.data
+package uk.co.zac_h.daggermvvmjetpack.data.model
 
 import com.squareup.moshi.Json
 
