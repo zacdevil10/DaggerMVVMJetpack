@@ -35,10 +35,8 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.apply {
-            viewModel = viewModel
-            lifecycleOwner = this@MainFragment
-        }
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
     }
 
 }
