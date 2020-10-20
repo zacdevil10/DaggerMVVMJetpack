@@ -9,9 +9,9 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 class NetworkModule {
 
     @Provides
-    fun providesRetrofitService(): SpaceXInterface = Retrofit.Builder().apply {
+    fun providesRetrofitService(): HttpService = Retrofit.Builder().apply {
         baseUrl("https://api.spacexdata.com/v3/")
         addConverterFactory(MoshiConverterFactory.create())
-    }.build().create(SpaceXInterface::class.java)
+    }.build().create(HttpService::class.java)
 
 }
