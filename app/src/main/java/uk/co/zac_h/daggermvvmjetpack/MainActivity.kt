@@ -2,6 +2,7 @@ package uk.co.zac_h.daggermvvmjetpack
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import uk.co.zac_h.daggermvvmjetpack.di.ApplicationComponent
 import uk.co.zac_h.daggermvvmjetpack.ui.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
@@ -15,4 +16,5 @@ class MainActivity : AppCompatActivity() {
                     .commitNow()
         }
     }
+    
 }

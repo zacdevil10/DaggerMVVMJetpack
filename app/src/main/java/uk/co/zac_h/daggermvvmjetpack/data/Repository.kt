@@ -1,8 +1,10 @@
 package uk.co.zac_h.daggermvvmjetpack.data
 
-class Repository {
+import javax.inject.Inject
 
-    private val retrofit = NetworkModule().create()
+class Repository @Inject constructor() {
+
+    private val retrofit = NetworkModule().providesRetrofitService()
 
     suspend fun getLaunch() = retrofit.getNextLaunch()
 

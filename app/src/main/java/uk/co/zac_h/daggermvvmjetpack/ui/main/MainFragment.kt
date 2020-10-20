@@ -9,9 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import uk.co.zac_h.daggermvvmjetpack.App
 import uk.co.zac_h.daggermvvmjetpack.R
 import uk.co.zac_h.daggermvvmjetpack.data.LaunchModel
 import uk.co.zac_h.daggermvvmjetpack.databinding.MainFragmentBinding
+import javax.inject.Inject
 
 class MainFragment : Fragment() {
 
@@ -21,7 +23,7 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
-    private lateinit var viewModel: MainViewModel
+    @Inject lateinit var viewModel: MainViewModel
 
     val name = MutableLiveData<String>()
 
@@ -30,18 +32,19 @@ class MainFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        (context?.applicationContext as App).appComponent.inject(this)
+
         binding = DataBindingUtil.inflate(inflater, R.layout.main_fragment, container, false)
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val launchObserver = Observer<LaunchModel> {
             println(it)
-            //binding.message.text = it.missionName
-            binding.launch?.name?.postValue(it.missionName)
+            binding.message.text = it.missionName
+            //binding.launch?.name?.postValue(it.missionName)
         }
 
         viewModel.launch.observe(this, launchObserver)

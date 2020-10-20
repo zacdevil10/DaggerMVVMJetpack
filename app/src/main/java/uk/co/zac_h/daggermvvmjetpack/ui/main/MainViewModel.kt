@@ -6,10 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import uk.co.zac_h.daggermvvmjetpack.data.LaunchModel
 import uk.co.zac_h.daggermvvmjetpack.data.Repository
+import javax.inject.Inject
 
-class MainViewModel : ViewModel() {
-
-    private val repository = Repository()
+class MainViewModel @Inject constructor(
+    private val repository: Repository
+) : ViewModel() {
 
     val launch: LiveData<LaunchModel> = liveData {
         loading.postValue(true)
