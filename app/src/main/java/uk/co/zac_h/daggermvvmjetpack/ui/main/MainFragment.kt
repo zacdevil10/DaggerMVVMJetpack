@@ -4,39 +4,41 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import uk.co.zac_h.daggermvvmjetpack.App
-import uk.co.zac_h.daggermvvmjetpack.R
+import dagger.android.support.DaggerFragment
 import uk.co.zac_h.daggermvvmjetpack.databinding.MainFragmentBinding
 import javax.inject.Inject
 
-class MainFragment : Fragment() {
+class MainFragment : DaggerFragment() {
 
-    private lateinit var binding: MainFragmentBinding
+    private var binding: MainFragmentBinding? = null
 
     companion object {
         fun newInstance() = MainFragment()
     }
 
-    @Inject lateinit var viewModel: MainViewModel
+    @Inject lateinit var mainViewModel: MainViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        (context?.applicationContext as App).appComponent.inject(this)
-
-        binding = DataBindingUtil.inflate(inflater, R.layout.main_fragment, container, false)
-        return binding.root
+    ): View? {
+        binding = MainFragmentBinding.inflate(inflater, container, false)
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+        binding?.apply {
+            viewModel = mainViewModel
+            lifecycleOwner = this@MainFragment
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 
 }

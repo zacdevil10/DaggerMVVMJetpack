@@ -5,7 +5,7 @@ import uk.co.zac_h.daggermvvmjetpack.data.model.LaunchModel
 
 interface HttpService {
 
-    @GET("launches/next")
+    @GET("launches/50")
     suspend fun getNextLaunch(): LaunchModel
 
 }

@@ -20,9 +20,11 @@
         android:animateLayoutChanges="true">
 
         <ProgressBar
+            android:id="@+id/progress_bar"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:indeterminate="true"
             android:visibility="@{viewModel.loading ? View.VISIBLE : View.GONE}"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,9 +32,9 @@
             android:id="@+id/message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
             android:text="@{viewModel.launch.missionName}"
             android:textColor="@android:color/holo_blue_light"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -41,7 +43,7 @@
             android:id="@+id/image"
             android:layout_width="72dp"
             android:layout_height="72dp"
-            android:visibility="@{viewModel.showHide ? View.VISIBLE : View.GONE}"
+            android:visibility="@{viewModel.showContent ? View.VISIBLE : View.GONE}"
             app:imageUrl="@{viewModel.launch.links.missionPatch}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +53,7 @@
         <com.google.android.material.button.MaterialButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="@{() -> viewModel.showHide()}"
+            android:onClick="@{() -> viewModel.toggleVisibility()}"
             android:text="Show/Hide"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
